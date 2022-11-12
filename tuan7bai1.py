@@ -1,15 +1,6 @@
-from unittest import result
 import streamlit as st
-from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
-from sklearn import datasets, linear_model, metrics
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-from sklearn.datasets import make_blobs
-from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
