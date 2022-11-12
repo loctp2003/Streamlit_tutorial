@@ -1,11 +1,8 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
-import altair as alt
-import plotly.figure_factory as ff
+
 
 a=st.number_input('Nhap a:')
 
