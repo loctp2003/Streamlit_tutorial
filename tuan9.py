@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -8,7 +7,6 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 import pandas as pd
 import altair as alt
-import plotly.figure_factory as ff
 N = 150
 centers = [[2, 3], [5, 5], [1, 8]]
 n_classes = len(centers)
