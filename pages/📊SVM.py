@@ -84,6 +84,7 @@ def Bai01():
             x="x:Q",
             y="y:Q",
             color=alt.Color("z", scale=None),
+            tooltip=["x", "y", "color"],
         )
     )
     support_vectors = svc.support_vectors_
