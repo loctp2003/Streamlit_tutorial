@@ -29,7 +29,6 @@ def Bai01():
         plt.plot([x1, x2], [y1, y2])
      
         st.pyplot()
-        st.set_option('deprecation.showPyplotGlobalUse', False)
     with col2:
         st.write("w :",w)
         #Tinh sai so
