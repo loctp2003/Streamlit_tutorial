@@ -12,7 +12,7 @@ import altair as alt
 import plotly.express as px
 import joblib
 import cv2
-from PIL import ImageTk, Image
+from PIL import  Image
 import io
 st.set_page_config(page_title="Plotting Demo", page_icon="📈")
 st.title('KNN')
