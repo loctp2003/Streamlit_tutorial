@@ -1,7 +1,7 @@
 import sys
 import streamlit as st
 import numpy as np
-from PIL import ImageTk, Image
+from PIL import  Image
 import os.path
 import cv2
 import joblib
