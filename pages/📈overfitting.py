@@ -29,8 +29,8 @@ def Bai01():
             .encode(
                 x="x:Q",
                 y="y:Q",
-                color = alt.Color("color", scale=None)
-                
+                color = alt.Color("color", scale=None),
+                tooltip=["x", "y", "color"]
             )
         )
         z2="yellow"
@@ -91,8 +91,8 @@ def Bai02():
             .encode(
                 x="x:Q",
                 y="y:Q",
-                color = alt.Color("color", scale=None)
-                
+                color = alt.Color("color", scale=None),
+                tooltip=["x", "y", "color"]
             )
         )
         z2="yellow"
