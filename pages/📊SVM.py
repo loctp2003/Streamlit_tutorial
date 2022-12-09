@@ -52,7 +52,7 @@ def Bai01():
             x="x:Q",
             y="y:Q",
             color=alt.Color("color", scale=None),
-            tooltip=["x", "y", "color","nhom"],
+            tooltip=["x", "y", "color","nhom"]
         )
     )
     xx = np.linspace(2, 7)
@@ -78,13 +78,13 @@ def Bai01():
         .encode(x="x:Q", y="y:Q")
     )
     b = (
-        alt.Chart(pd.DataFrame({"x":svc.support_vectors_[:, 0] , "y":svc.support_vectors_[:, 1],"z":"blue"}))
+        alt.Chart(pd.DataFrame({"x":svc.support_vectors_[:, 0] , "y":svc.support_vectors_[:, 1],"color":"blue"}))
         .mark_square(size=70)
         .encode(
             x="x:Q",
             y="y:Q",
-            color=alt.Color("z", scale=None),
-            tooltip=["x", "y", "color"],
+            color=alt.Color("color", scale=None),
+            tooltip=["x", "y", "color"]
         )
     )
     support_vectors = svc.support_vectors_
