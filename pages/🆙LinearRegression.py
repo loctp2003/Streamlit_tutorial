@@ -27,7 +27,7 @@ def Bai01():
         y2 = x2*w[1, 0] + w[0, 0]
         plt.plot(X, y.T, 'ro')
         plt.plot([x1, x2], [y1, y2])
-        st.set_option('deprecation.showPyplotGlobalUse', False)
+     
         st.pyplot()
         st.set_option('deprecation.showPyplotGlobalUse', False)
     with col2:
