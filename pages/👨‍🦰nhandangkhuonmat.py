@@ -1,7 +1,7 @@
 import sys
 import streamlit as st
 import numpy as np
-from PIL import  Image
+from PIL import ImageTk, Image
 import os.path
 import cv2
 import joblib
@@ -26,8 +26,9 @@ if image_file is not None:
     file_name = "test/" + file_name
     st.write(file_name)
     col1, col2 = st.columns(2)
+    image = Image.open(image_file)
     with col1:
-        st.image(file_name)
+        st.image(image)
     if st.button('Nhan Dang'):
         with col2:
             img_array = cv2.imread(file_name)
