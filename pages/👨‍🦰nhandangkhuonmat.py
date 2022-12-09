@@ -1,7 +1,4 @@
 import sys
-import tkinter
-from tkinter import Frame, Tk, BOTH, Text, Menu, END
-from tkinter.filedialog import Open, SaveAs
 import streamlit as st
 import numpy as np
 from PIL import ImageTk, Image
