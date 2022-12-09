@@ -20,14 +20,6 @@ def Bai01():
     st.markdown("### Can nang 🫄")
     st.write(y.T)
     col1, col2 = st.columns([3, 1])
-    sample = st.sidebar.number_input('Nhap chieu cao 🚶:')
-    btn_giai = st.sidebar.button('Tinh')
-    if btn_giai not in st.session_state:
-        st.session_state.btn_giai = False
-    if btn_giai or st.session_state.btn_giai: 
-        st.session_state.btn_giai = True
-        ket_qua = sample*w[1, 0] + w[0, 0]
-        st.sidebar.write('Chieu cao 🚶: %d thi can nang 🫄 la: %d' % (sample, ket_qua))
     with col1:
         x1 = X[0, 0]
         y1 = x1*w[1, 0] + w[0, 0]
@@ -55,6 +47,15 @@ def Bai01():
         loss = loss/(2*13)
         st.write('Sai so:(ham norm) ')
         st.write(loss)
+    sample = st.sidebar.number_input('Nhap chieu cao 🚶:')
+    btn_giai = st.sidebar.button('Tinh')
+    if btn_giai not in st.session_state:
+        st.session_state.btn_giai = False
+    if btn_giai or st.session_state.btn_giai: 
+        st.session_state.btn_giai = True
+        ket_qua = sample*w[1, 0] + w[0, 0]
+        st.sidebar.write('Chieu cao 🚶: %d thi can nang 🫄 la: %d' % (sample, ket_qua))
+    
         
         
 def Bai02():
