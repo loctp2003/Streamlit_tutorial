@@ -81,6 +81,7 @@ def Bai03():
                 x="x:Q",
                 y="y:Q",
                 color = alt.Color("color", scale=None),
+                tooltip=["x", "y", "color"]
             )
         )
         # Chuyen mang 1 chieu thanh vector
