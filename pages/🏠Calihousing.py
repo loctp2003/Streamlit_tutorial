@@ -478,6 +478,6 @@ if uploaded_file is not None:
     elif page == 'RandomForestRegression':
         Random_Forest_Regression(housing)
     elif page == 'KetQua':
-        KetQua()
+        Ketqua()
     else :
         PhanNhomMedianIncome(housing)
