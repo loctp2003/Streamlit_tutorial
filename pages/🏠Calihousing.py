@@ -460,13 +460,8 @@ if uploaded_file is not None:
             mse_test = mean_squared_error(y_test, y_predictions)
             rmse_test = np.sqrt(mse_test)
             st.markdown('### 3.Sai so binh phuong trung binh - test:%.2f' % rmse_test)
-    def Ketqua():
-                st.title('KetQuaDanhGia')
-                df1=pd.read_excel("KetQuaDanhGia.xlsx")
-                AgGrid(df1)
-                 
 
-    page = st.sidebar.selectbox('Select page',['PhannhomMedianIncome','DecisionTreeRegressor','LinearRegression','RandomForestRegressionGridSearchCV','RandomForestRegressionRandomSearchCV', 'RandomForestRegression','KetQua',]) 
+    page = st.sidebar.selectbox('Select page',['PhannhomMedianIncome','DecisionTreeRegressor','LinearRegression','RandomForestRegressionGridSearchCV','RandomForestRegressionRandomSearchCV', 'RandomForestRegression',]) 
     if page == 'DecisionTreeRegressor':
         Decision_Tree_Regressor(housing)
     elif page == 'LinearRegression':
@@ -477,7 +472,5 @@ if uploaded_file is not None:
         Random_Forest_Regression_Random_Search_CV(housing)
     elif page == 'RandomForestRegression':
         Random_Forest_Regression(housing)
-    elif page == 'KetQua':
-        Ketqua()
     else :
         PhanNhomMedianIncome(housing)
