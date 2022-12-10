@@ -16,6 +16,7 @@ from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import randint
 from sklearn.ensemble import RandomForestRegressor
 import streamlit as st
+from st_aggrid import AgGrid
 st.title("CaliHousing🏠")
 uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
@@ -403,78 +404,69 @@ if uploaded_file is not None:
         def display_scores(scores):
             st.markdown("#### -Mean: %.2f" % (scores.mean()))
             st.markdown("#### -Standard deviation: %.2f" % (scores.std()))
-            housing["income_cat"] = pd.cut(housing["median_income"],
+        housing["income_cat"] = pd.cut(housing["median_income"],
                                         bins=[0., 1.5, 3.0, 4.5, 6., np.inf],
                                         labels=[1, 2, 3, 4, 5])
-
-            split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
-            for train_index, test_index in split.split(housing, housing["income_cat"]):
+        split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+        for train_index, test_index in split.split(housing, housing["income_cat"]):
                 strat_train_set = housing.loc[train_index]
                 strat_test_set = housing.loc[test_index]
 
             # Chia xong thi delete column income_cat
-            for set_ in (strat_train_set, strat_test_set):
-                set_.drop("income_cat", axis=1, inplace=True)
+        for set_ in (strat_train_set, strat_test_set):
+            set_.drop("income_cat", axis=1, inplace=True)
+        housing = strat_train_set.drop("median_house_value", axis=1)
+        housing_labels = strat_train_set["median_house_value"].copy()
+        housing_num = housing.drop("ocean_proximity", axis=1)
+        num_pipeline = Pipeline([
+                ('imputer', SimpleImputer(strategy="median")),
+                ('attribs_adder', CombinedAttributesAdder()),
+                ('std_scaler', StandardScaler()),
+            ])
+        num_attribs = list(housing_num)
+        cat_attribs = ["ocean_proximity"]
+        full_pipeline = ColumnTransformer([
+                ("num", num_pipeline, num_attribs),
+                ("cat", OneHotEncoder(), cat_attribs),
+            ])
+        housing_prepared = full_pipeline.fit_transform(housing)
+        # Training
+        forest_reg = RandomForestRegressor()
+        forest_reg.fit(housing_prepared, housing_labels)
+        # Prediction
+        some_data = housing.iloc[:5]
+        some_labels = housing_labels.iloc[:5]
+        some_data_prepared = full_pipeline.transform(some_data)
+        # Prediction 5 samples 
+        with col1:
+            st.write("Predictions:", forest_reg.predict(some_data_prepared))
+            st.write("Labels:", list(some_labels))
+        with col2:
+        # Tính sai số bình phương trung bình trên tập dữ liệu huấn luyện
+            housing_predictions = forest_reg.predict(housing_prepared)
+            mse_train = mean_squared_error(housing_labels, housing_predictions)
+            rmse_train = np.sqrt(mse_train)
+            st.markdown('### 1.Sai so binh phuong trung binh - train:%.2f' % rmse_train)
+            # Tính sai số bình phương trung bình trên tập dữ liệu kiểm định chéo (cross-validation) 
+            scores = cross_val_score(forest_reg, housing_prepared, housing_labels, scoring="neg_mean_squared_error", cv=10)
+            st.markdown('### 2.Sai so binh phuong trung binh - cross-validation:')
+            rmse_cross_validation = np.sqrt(-scores)
+            display_scores(rmse_cross_validation)
+            # Tính sai số bình phương trung bình trên tập dữ liệu kiểm tra (test)
+            X_test = strat_test_set.drop("median_house_value", axis=1)
+            y_test = strat_test_set["median_house_value"].copy()
+            X_test_prepared = full_pipeline.transform(X_test)
+            y_predictions = forest_reg.predict(X_test_prepared)
+            mse_test = mean_squared_error(y_test, y_predictions)
+            rmse_test = np.sqrt(mse_test)
+            st.markdown('### 3.Sai so binh phuong trung binh - test:%.2f' % rmse_test)
+    def Ketqua():
+                st.title('KetQuaDanhGia')
+                df1=pd.read_excel("KetQuaDanhGia.xlsx")
+                AgGrid(df1)
+                 
 
-            housing = strat_train_set.drop("median_house_value", axis=1)
-            housing_labels = strat_train_set["median_house_value"].copy()
-
-            housing_num = housing.drop("ocean_proximity", axis=1)
-
-            num_pipeline = Pipeline([
-                    ('imputer', SimpleImputer(strategy="median")),
-                    ('attribs_adder', CombinedAttributesAdder()),
-                    ('std_scaler', StandardScaler()),
-                ])
-
-            num_attribs = list(housing_num)
-            cat_attribs = ["ocean_proximity"]
-            full_pipeline = ColumnTransformer([
-                    ("num", num_pipeline, num_attribs),
-                    ("cat", OneHotEncoder(), cat_attribs),
-                ])
-
-            housing_prepared = full_pipeline.fit_transform(housing)
-
-            # Training
-            forest_reg = RandomForestRegressor()
-            forest_reg.fit(housing_prepared, housing_labels)
-
-
-            # Prediction
-            some_data = housing.iloc[:5]
-            some_labels = housing_labels.iloc[:5]
-            some_data_prepared = full_pipeline.transform(some_data)
-            # Prediction 5 samples 
-            with col1:
-                st.write("Predictions:", forest_reg.predict(some_data_prepared))
-                st.write("Labels:", list(some_labels))
-            with col2:
-            # Tính sai số bình phương trung bình trên tập dữ liệu huấn luyện
-                housing_predictions = forest_reg.predict(housing_prepared)
-                mse_train = mean_squared_error(housing_labels, housing_predictions)
-                rmse_train = np.sqrt(mse_train)
-                st.markdown('### 1.Sai so binh phuong trung binh - train:%.2f' % rmse_train)
-
-                # Tính sai số bình phương trung bình trên tập dữ liệu kiểm định chéo (cross-validation) 
-                scores = cross_val_score(forest_reg, housing_prepared, housing_labels, scoring="neg_mean_squared_error", cv=10)
-
-                st.markdown('### 2.Sai so binh phuong trung binh - cross-validation:')
-                rmse_cross_validation = np.sqrt(-scores)
-                display_scores(rmse_cross_validation)
-
-                # Tính sai số bình phương trung bình trên tập dữ liệu kiểm tra (test)
-                X_test = strat_test_set.drop("median_house_value", axis=1)
-                y_test = strat_test_set["median_house_value"].copy()
-                X_test_prepared = full_pipeline.transform(X_test)
-                y_predictions = forest_reg.predict(X_test_prepared)
-
-                mse_test = mean_squared_error(y_test, y_predictions)
-                rmse_test = np.sqrt(mse_test)
-                st.markdown('### 3.Sai so binh phuong trung binh - test:%.2f' % rmse_test)
-
-
-    page = st.sidebar.selectbox('Select page',['PhannhomMedianIncome','DecisionTreeRegressor','LinearRegression','RandomForestRegressionGridSearchCV','RandomForestRegressionRandomSearchCV', 'RandomForestRegression']) 
+    page = st.sidebar.selectbox('Select page',['PhannhomMedianIncome','DecisionTreeRegressor','LinearRegression','RandomForestRegressionGridSearchCV','RandomForestRegressionRandomSearchCV', 'RandomForestRegression','KetQua',]) 
     if page == 'DecisionTreeRegressor':
         Decision_Tree_Regressor(housing)
     elif page == 'LinearRegression':
@@ -485,5 +477,7 @@ if uploaded_file is not None:
         Random_Forest_Regression_Random_Search_CV(housing)
     elif page == 'RandomForestRegression':
         Random_Forest_Regression(housing)
+    elif page == 'KetQua':
+        KetQua()
     else :
         PhanNhomMedianIncome(housing)
