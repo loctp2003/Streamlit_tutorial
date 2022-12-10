@@ -98,14 +98,17 @@ def Bai03():
     st.write('Sai so 🔢:',loss)
 def Bai04():
     st.title('Bai04 👏')
+    col1,col2 = st.columns(2)
     X = np.array([[35.3, 29.7, 30.8, 58.8, 61.4, 71.3, 74.4, 76.7, 70.7, 57.5, 46.4, 28.9, 28.1, 39.1, 46.8, 48.5, 59.3, 70.0, 70.0, 74.5, 72.1, 58.1, 44.6, 33.4, 28.6],
               [20, 20, 23, 20, 21, 22, 11, 23, 21, 20, 20, 21, 21, 19, 23, 20, 22, 22, 11, 23, 20, 21, 20, 20, 22]]).T
 
     y = np.array([10.98, 11.13, 12.51, 8.40, 9.27, 8.73, 6.36, 8.50, 7.82, 9.14, 8.24, 12.19, 11.88, 9.57, 10.94, 9.58, 10.09, 8.11, 6.83, 8.88, 7.68, 8.47, 8.86, 10.36, 11.08])
-    st.markdown("### X")
-    st.write(X.T)
-    st.markdown("### y")
-    st.write(y)
+    with col1:
+        st.markdown("### X")
+        st.write(X)
+    with col2:
+        st.markdown("### y")
+        st.write(y)
     regr = linear_model.LinearRegression()
     regr.fit(X, y) 
     w1 = regr.coef_[0]
