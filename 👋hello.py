@@ -12,9 +12,7 @@ st.markdown(
     👈  https://github.com/loctp2003/Streamlit_tutorial/
     ### Thành viên:
     - #### Vũ Đức Lộc   21110535
-    ### See more complex demos
-    - Use a neural net to [analyze the Udacity Self-driving Car Image
-        Dataset](https://github.com/streamlit/demo-self-driving)
-    - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+    ### Link Driver:
+    👈  https://drive.google.com/drive/u/0/folders/1iV8ehYGzTQ6kjE4bVkP_vCLEe_2jQ5H2
 """
 )
