@@ -9,9 +9,9 @@ st.write("# Project cuối kì môn Học máy! 👋")
 st.markdown(
     """
     Link :
-    **👈 ** https://github.com/loctp2003/Streamlit_tutorial/
+    👈  https://github.com/loctp2003/Streamlit_tutorial/
     ### Thành viên:
-    - Vũ Đức Lộc   21110535
+    - #### Vũ Đức Lộc   21110535
     ### See more complex demos
     - Use a neural net to [analyze the Udacity Self-driving Car Image
         Dataset](https://github.com/streamlit/demo-self-driving)
