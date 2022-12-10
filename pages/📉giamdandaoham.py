@@ -45,7 +45,7 @@ def Bai01():
         lines = (
         alt.Chart(pd.DataFrame({"x": [X], "y": [Y],"color":"red"}))
         .mark_circle(size=400)
-        .encode(x="x:Q", y="y:Q",color = alt.Color("color", scale=None))
+        .encode(x="x:Q", y="y:Q",color = alt.Color("color", scale=None),tooltip=["x", "y", "color")
         )
         st.altair_chart(c+lines, use_container_width=True)
         s = 'iter %d/%d, grad = %.4f' % (b, it1, grad(x1[b]))
