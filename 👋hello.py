@@ -9,8 +9,7 @@ st.write("# Project cuối kì môn Học máy! 👋")
 st.markdown(
     """
     Link :
-    **👈 Select a demo from the sidebar** to see some examples
-    of what Streamlit can do!
+    **👈 ** https://github.com/loctp2003/Streamlit_tutorial/
     ### Thành viên:
     - Vũ Đức Lộc   21110535
     ### See more complex demos
