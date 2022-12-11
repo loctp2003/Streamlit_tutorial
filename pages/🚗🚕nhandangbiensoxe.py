@@ -13,8 +13,8 @@ if image_file is not None:
     image = Image.open(image_path)
     with col1:
         st.image(image)
-    api_key = 'Mh3KJrf0Gr1YTSoAo4gZzQk0wmdn66Bx'
-    model_id = '59aedc47-df0d-4e93-a52d-dd7076da1287'
+    model_id = '06daf2be-8412-4e7c-a4e5-7c3aec7679b2'
+    api_key = 'OkRErMwrDab5PC6C2UX3gRB0UZtyfKQa'
 
     url = 'https://app.nanonets.com/api/v2/ObjectDetection/Model/' + model_id + '/LabelFile/'
 
