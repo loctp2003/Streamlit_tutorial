@@ -16,7 +16,6 @@ from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import randint
 from sklearn.ensemble import RandomForestRegressor
 import streamlit as st
-from st_aggrid import AgGrid
 st.title("CaliHousing🏠")
 uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
